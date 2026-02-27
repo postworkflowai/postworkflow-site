@@ -12,60 +12,61 @@ html, body {
   height: 100%;
   background: #000;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
 }
 
-.container {
-  text-align: center;
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 30px;
   letter-spacing: 0.42em;
   font-weight: 500;
-  margin: 0 0 50px 0;
   text-transform: uppercase;
-}
-
-.logo {
-  width: 105px;
-  margin: 0 auto 45px auto;
-  display: block;
+  margin: 0 0 35px 0;
 }
 
 .tagline {
   font-size: 12px;
-  letter-spacing: 0.22em;
-  font-weight: 400;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  margin: 0;
+  font-weight: 400;
+  padding: 14px 28px;
+  background: #111;
+  margin-bottom: 45px;
+}
+
+.logo {
+  width: 110px;
 }
 
 footer {
   position: absolute;
-  bottom: 30px;
-  width: 100%;
-  text-align: center;
+  bottom: 40px;
+  padding: 12px 24px;
+  background: #111;
   font-size: 10px;
-  color: #777;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  color: #aaa;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
   <h1>POSTWORKFLOW.AI</h1>
-
-  <img src="logo.png" class="logo" alt="Logo">
 
   <div class="tagline">
     DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST
   </div>
+
+  <img src="logo.png" class="logo" alt="Logo">
 </div>
 
 <footer>
