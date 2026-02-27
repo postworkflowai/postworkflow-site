@@ -7,10 +7,9 @@
 
   <style>
     :root{
-      --bg: #000;        /* PURE BLACK */
+      --bg: #000;     /* PURE BLACK */
       --white: #fff;
-      --panel: #101010;  /* subtle strip behind tagline + footer */
-      --footerText: #a8a8a8;
+      --footerText: #777;
     }
 
     html, body {
@@ -21,7 +20,7 @@
       font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
 
-    /* layout: match the PDF composition */
+    /* Overall stage */
     .stage {
       height: 100%;
       position: relative;
@@ -32,13 +31,13 @@
       text-align: center;
     }
 
-    /* Title + tagline sit in the upper third */
+    /* Title + tagline in upper third (like your PDF) */
     .header {
-      margin-top: 20vh; /* move up/down to taste */
+      margin-top: 20vh;     /* controls how high the header sits */
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px; /* title-to-tagline spacing */
+      gap: 14px;            /* title-to-tagline spacing */
     }
 
     h1 {
@@ -46,50 +45,47 @@
       text-transform: uppercase;
       font-weight: 500;
       font-size: 30px;
-      letter-spacing: 0.42em;  /* spaced out like your mock */
+      letter-spacing: 0.42em;
       line-height: 1;
     }
 
+    /* Tagline: NO background, just text */
     .tagline {
+      margin: 0;
       text-transform: uppercase;
       font-weight: 400;
       font-size: 12px;
       letter-spacing: 0.22em;
-      background: var(--panel);
-      padding: 14px 34px;      /* strip thickness */
-      border-radius: 0;        /* hard edges like the PDF */
       line-height: 1.2;
-      white-space: nowrap;     /* keeps it one line like your PDF */
+      white-space: nowrap; /* keeps one line like your mock */
     }
 
-    /* Logo floats below the header */
+    /* Logo sits below the tagline */
     .logo {
-      margin-top: 44px; /* space between tagline strip and logo */
-      width: 110px;     /* same size as before */
+      margin-top: 44px; /* space between tagline and logo */
+      width: 110px;
       height: auto;
       display: block;
     }
 
-    /* Footer strip centered near bottom */
+    /* Footer: centered, calm, NO background */
     footer {
       position: absolute;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--panel);
-      padding: 14px 34px;
       font-size: 10px;
       letter-spacing: 0.10em;
       color: var(--footerText);
       white-space: nowrap;
+      text-align: center;
     }
 
-    /* Small screens: keep it tidy */
     @media (max-width: 520px) {
       h1 { font-size: 24px; letter-spacing: 0.34em; }
-      .tagline { font-size: 10px; letter-spacing: 0.18em; padding: 12px 18px; white-space: normal; max-width: 90vw; }
+      .tagline { font-size: 10px; letter-spacing: 0.18em; white-space: normal; max-width: 90vw; }
       .logo { width: 96px; }
-      footer { font-size: 9px; padding: 12px 18px; white-space: normal; max-width: 90vw; text-align: center; }
+      footer { font-size: 9px; white-space: normal; max-width: 90vw; }
       .header { margin-top: 18vh; }
     }
   </style>
