@@ -1,80 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Postworkflow.ai</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: #000;
-  color: #fff;
-  font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-}
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 
-/* Text block positioned above centre */
-.header {
-  position: absolute;
-  top: 32%;
-  width: 100%;
-  text-align: center;
-}
+  :root {
+    --shimmerStrength: 0.35;  /* 0.25 subtle, 0.5 stronger */
+    --shimmerSpeed: 1.2s;     /* speed of shimmer */
+  }
 
-h1 {
-  margin: 0 0 14px 0; /* tighter to tagline */
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 30px;
-  letter-spacing: 0.42em;
-}
+  .title-wrap {
+    position: relative;
+    text-align: center;
+  }
 
-.tagline {
-  margin: 0;
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-}
+  h1 {
+    margin: 0 0 14px 0;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
 
-/* Logo centred exactly */
-.logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 132px; /* ~20% larger than 110px */
-}
+  /* Shimmer overlay */
+  h1::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: transparent;
 
-/* Calm footer */
-footer {
-  position: fixed;
-  bottom: 35px;
-  width: 100%;
-  text-align: center;
-  font-size: 10px;
-  letter-spacing: 0.10em;
-  color: #777;
-}
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0) 40%,
+      rgba(255,255,255,var(--shimmerStrength)) 50%,
+      rgba(255,255,255,0) 60%
+    );
+
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    animation: shimmerMove var(--shimmerSpeed) linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmerMove {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  .tagline {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #cfcfcf;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 35px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    color: #777;
+  }
+
+  @media (max-width: 520px) {
+    h1 { font-size: 24px; letter-spacing: 0.34em; }
+    .tagline { font-size: 10px; letter-spacing: 0.18em; padding: 0 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1::after { animation: none; }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>POSTWORKFLOW.AI</h1>
-  <div class="tagline">
-    DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST
-  </div>
+<div class="title-wrap">
+  <h1 data-text="POSTWORKFLOW.AI">POSTWORKFLOW.AI</h1>
+  <div class="tagline">DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST</div>
 </div>
 
-<img src="logo.png" class="logo" alt="Logo" />
-
-<footer>
-  © 2026 Postworkflow.ai. All rights reserved.
-</footer>
+<footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
 
 </body>
 </html>
