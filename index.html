@@ -20,8 +20,8 @@
   }
 
   :root {
-    --shimmerStrength: 0.35;  /* 0.25 subtle, 0.5 stronger */
-    --shimmerSpeed: 1.2s;     /* speed of shimmer */
+    --shimmerStrength: 0.30;
+    --shimmerSpeed: 1.2s;
   }
 
   .title-wrap {
@@ -73,6 +73,14 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #cfcfcf;
+    margin-bottom: 18px;
+  }
+
+  .status {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #777;
   }
 
   footer {
@@ -82,7 +90,7 @@
     text-align: center;
     font-size: 10px;
     letter-spacing: 0.10em;
-    color: #777;
+    color: #555;
   }
 
   @media (max-width: 520px) {
@@ -101,6 +109,7 @@
 <div class="title-wrap">
   <h1 data-text="POSTWORKFLOW.AI">POSTWORKFLOW.AI</h1>
   <div class="tagline">DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST</div>
+  <div class="status">SYSTEM BUILD IN PROGRESS</div>
 </div>
 
 <footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
