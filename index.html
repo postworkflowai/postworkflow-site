@@ -1,115 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Postworkflow.ai</title>
-
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Avenir+Next+Condensed:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Avenir+Next+Condensed:wght@400;700&display=swap');
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    color: #fff;
-    font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Avenir Next Condensed', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  h1 {
-    font-size: 28px;
-    letter-spacing: 0.42em;
-    text-transform: uppercase;
-    margin: 0;
-  }
+h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin: 0;
+}
 
-  .tagline {
-    font-size: 12px;
-    letter-spacing: 0.22em;
-    color: #ccc;
-    margin-top: 6px;
-    text-transform: uppercase;
-  }
+.tagline {
+  margin-top: 0.3rem;
+  font-size: clamp(0.75rem, 1.3vw, 1rem);
+  letter-spacing: 0.3em;
+  color: #cccccc;
+  text-transform: uppercase;
+}
 
-  .logo-container {
-    position: relative;
-    width: 132px;  /* ~20% larger */
-    height: auto;
-    margin-top: 30px;
-  }
+.logo-wrapper {
+  position: relative;
+  width: 280px;    /* increase size by ~20% */
+  margin-top: 1.5rem;
+}
 
-  .logo-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 2;
-  }
+.logo-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-  /* Outline shimmer effect */
-  .logo-outline {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border: 2px solid rgba(255,255,255,0.0);
-    border-radius: 8px;
-    box-sizing: border-box;
-    animation: traceGlow 2.5s linear infinite;
-    pointer-events: none;
-  }
+/* subtle shimmer along the logo outline */
+.logo-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.0) 100%);
+  background-size: 200% 200%;
+  mask-image: url('logo_alpha.png');
+  -webkit-mask-image: url('logo_alpha.png');
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  pointer-events: none;
+  animation: shimmer 3s linear infinite;
+  opacity: 0.8;
+}
 
-  @keyframes traceGlow {
-    0% {
-      border-color: rgba(255,255,255,0.0);
-      transform: translate(-4px, -4px) scale(1.04);
-    }
-    30% {
-      border-color: rgba(255,255,255,0.25);
-      transform: translate(-2px, -2px) scale(1.02);
-    }
-    60% {
-      border-color: rgba(255,255,255,0.15);
-      transform: translate(2px, 2px) scale(1.00);
-    }
-    100% {
-      border-color: rgba(255,255,255,0.0);
-      transform: translate(4px, 4px) scale(0.98);
-    }
-  }
+@keyframes shimmer {
+  0%   { background-position: 0% 0%;   }
+  100% { background-position: 100% 100%; }
+}
 
-  footer {
-    position: absolute;
-    bottom: 32px;
-    width: 100%;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 0.10em;
-    color: #777;
-  }
-
+footer {
+  position: absolute;
+  bottom: 1rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
 </style>
 </head>
-
 <body>
+  <div class="title-section">
+    <h1>Postworkflow.ai</h1>
+    <div class="tagline">Deterministic Infrastructure for Remote Post</div>
+  </div>
 
-<h1>POSTWORKFLOW.AI</h1>
-<div class="tagline">DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST</div>
+  <div class="logo-wrapper">
+    <img src="logo_alpha.png" alt="Postworkflow Logo">
+  </div>
 
-<div class="logo-container">
-  <div class="logo-outline"></div>
-  <img src="logo.png" alt="Postworkflow Logo">
-</div>
-
-<footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
-
+  <footer>&copy; 2026 Postworkflow.ai. All rights reserved.</footer>
 </body>
 </html>
