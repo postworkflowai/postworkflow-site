@@ -44,16 +44,15 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 132px; /* ~20% larger */
-  animation: breathe 6s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+  width: 132px;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
 }
 
-@keyframes breathe {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.025);
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 
