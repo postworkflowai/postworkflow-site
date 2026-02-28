@@ -1,178 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Postworkflow.ai</title>
+.logo-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 132px;
+  height: 132px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+}
 
-  <style>
-    :root {
-      --bg: #000;
-      --fg: #fff;
-      --muted: #777;
-    }
+.logo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      overflow: hidden;
-    }
+/* REAL element = reliable animation */
+.glow {
+  position: absolute;
+  z-index: 1;
 
-    /* Header block sits above center, and is brought closer to the logo */
-    .header {
-      position: absolute;
-      top: 35%;                 /* higher/lower = closer/further from logo */
-      left: 50%;
-      transform: translate(-50%, -100%); /* anchor header ABOVE its top position */
-      width: 100%;
-      text-align: center;
-      pointer-events: none;
-    }
+  /* bottom-right placement */
+  right: -10%;
+  bottom: -12%;
 
-    h1 {
-      margin: 0 0 10px 0;        /* tagline closer to heading */
-      text-transform: uppercase;
-      font-weight: 500;
-      font-size: 30px;
-      letter-spacing: 0.42em;
-      line-height: 1;
-    }
+  /* small glow size */
+  width: 58%;
+  height: 58%;
 
-    .tagline {
-      margin: 0;
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      line-height: 1.2;
-    }
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255,255,255,0.55) 0%,
+    rgba(255,255,255,0.18) 28%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.00) 70%
+  );
 
-    /* Logo wrapper centered in the frame */
-    .logo-wrap {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 132px;              /* ~20% bigger than 110px */
-      height: 132px;
-      transform: translate(-50%, -50%);
-      display: grid;
-      place-items: center;
-    }
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate(2px, 2px) scale(0.9);
+  will-change: transform, opacity;
 
-    .logo-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: relative;
-      z-index: 2;
-    }
+  animation: shimmerGlow 1.15s ease-in-out infinite;
+}
 
-    /*
-      Bottom-right shimmer/glow:
-      - Small
-      - Fairly quick
-      - Obvious
-      - Lives behind the logo (z-index 1)
-    */
-    .logo-wrap::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-
-      /* place it bottom-right of the logo */
-      right: -10%;
-      bottom: -12%;
-
-      /* small glow size */
-      width: 58%;
-      height: 58%;
-
-      /* glow look */
-      background: radial-gradient(
-        circle at 60% 60%,
-        rgba(255,255,255,0.55) 0%,
-        rgba(255,255,255,0.18) 28%,
-        rgba(255,255,255,0.08) 45%,
-        rgba(255,255,255,0.00) 70%
-      );
-
-      filter: blur(10px);
-      opacity: 0.0;
-      transform: translate(0, 0) scale(0.92);
-
-      /* fairly quick, subtle movement */
-      animation: shimmerGlow 3.15s ease-in-out infinite;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    @keyframes shimmerGlow {
-      0% {
-        opacity: 0.00;
-        transform: translate(2px, 2px) scale(1.00);
-      }
-      35%  { 
-      opacity: 1.00;    
-      transform: translate(-2px, -2px) scale(3.00);
-      }
-      55% {
-        opacity: 0.50;
-        transform: translate(-1px, -3px) scale(1.00);
-      }
-      100% {
-        opacity: 0.00;
-        transform: translate(3px, 1px) scale(0.90);
-      }
-    }
-
-    /* Calm centered footer */
-    footer {
-      position: fixed;
-      bottom: 35px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.10em;
-      color: var(--muted);
-      pointer-events: none;
-    }
-
-    /* Mobile: keep balance */
-    @media (max-width: 520px) {
-      h1 {
-        font-size: 24px;
-        letter-spacing: 0.34em;
-      }
-      .tagline {
-        font-size: 10px;
-        letter-spacing: 0.18em;
-        padding: 0 14px;
-      }
-      .logo-wrap {
-        width: 120px;
-        height: 120px;
-      }
-      .header {
-        top: 40%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="header">
-    <h1>POSTWORKFLOW.AI</h1>
-    <div class="tagline">DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST</div>
-  </div>
-
-  <div class="logo-wrap" aria-label="Postworkflow.ai logo">
-    <img src="logo.png" alt="Postworkflow.ai logo" />
-  </div>
-
-  <footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
-</body>
-</html>
+@keyframes shimmerGlow {
+  0%   { opacity: 0.00; transform: translate(2px, 2px) scale(0.90); }
+  35%  { opacity: 0.55; transform: translate(-2px, -2px) scale(1.00); }
+  55%  { opacity: 0.25; transform: translate(-1px, -3px) scale(0.98); }
+  100% { opacity: 0.00; transform: translate(3px, 1px) scale(0.90); }
+}
