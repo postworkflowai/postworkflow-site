@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Postworkflow.ai</title>
 
 <style>
-  :root{
-    --bg:#000;
-    --fg:#fff;
-    --muted:#cfcfcf;
-
-    /* tweak these only if needed */
-    --logoSize: 132px;     /* ~20% bigger than 110px */
-    --headerTop: 36%;      /* raise/lower header relative to logo */
-  }
-
   html, body{
-    height:100%;
     margin:0;
-    background:var(--bg);
-    color:var(--fg);
+    height:100%;
+    background:#000;
+    color:#fff;
     font-family:"Avenir Next Condensed","Avenir Next",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     overflow:hidden;
   }
 
-  /* Headline + tagline (above logo, closer to it) */
+  /* ===== Layout tuning knobs ===== */
+  :root{
+    --logoSize: 132px;         /* ~20% bigger than 110px */
+    --headerTop: 36%;          /* move text block up/down */
+    --textGap: 10px;           /* space between title and tagline */
+
+    --shimmerStrength: 0.60;   /* 0.35 subtle, 0.60 visible, 0.80 strong */
+    --shimmerSpeed: 1.15s;     /* 0.9s faster, 1.6s slower */
+    --cornerRadius: 14px;      /* soft rounding around logo border */
+    --strokeWidth: 2px;        /* shimmer stroke thickness */
+  }
+
+  /* ===== Title + tagline ===== */
   .header{
     position:absolute;
     top:var(--headerTop);
@@ -37,7 +39,7 @@
   }
 
   h1{
-    margin:0 0 10px 0;
+    margin:0 0 var(--textGap) 0;
     text-transform:uppercase;
     font-weight:500;
     font-size:30px;
@@ -51,11 +53,11 @@
     font-weight:400;
     font-size:12px;
     letter-spacing:0.22em;
-    color:var(--muted);
+    color:#cfcfcf;
     line-height:1.2;
   }
 
-  /* Logo centered dead-middle */
+  /* ===== Logo centered ===== */
   .logo-wrap{
     position:absolute;
     top:50%;
@@ -63,6 +65,8 @@
     width:var(--logoSize);
     height:var(--logoSize);
     transform:translate(-50%,-50%);
+    display:grid;
+    place-items:center;
   }
 
   .logo-wrap img{
@@ -74,48 +78,57 @@
   }
 
   /*
-    Subtle border shimmer:
-    - masked to the logo shape
-    - a thin diagonal highlight that moves TL -> BR
-    - subtle glow only (not the reference glow)
+    ===== Border shimmer that travels TL -> BR =====
+    Works reliably because it doesn't rely on PNG alpha/masks.
+    It's a small highlight that "runs" around the logo perimeter.
   */
   .shimmer{
     position:absolute;
-    inset:0;
-    z-index:1;
+    inset:-10px; /* slightly outside logo for a clean perimeter effect */
+    border-radius:var(--cornerRadius);
     pointer-events:none;
-
-    /* thin moving highlight */
-    background: linear-gradient(
-      135deg,
-      rgba(255,255,255,0.00) 42%,
-      rgba(255,255,255,0.22) 50%,
-      rgba(255,255,255,0.00) 58%
-    );
-    background-size: 220% 220%;
-    opacity: 0.75;
-    filter: blur(1.2px);
-
-    /* mask shimmer to logo edges/shape */
-    -webkit-mask-image: url("logo.png");
-    mask-image: url("logo.png");
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    /* make the highlight feel like it rides the border */
-    mix-blend-mode: screen;
-
-    animation: shimmerMove 1.25s linear infinite;
+    z-index:1;
   }
 
-  @keyframes shimmerMove{
+  /* This is the moving highlight */
+  .shimmer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    border:var(--strokeWidth) solid rgba(255,255,255,0.0);
+    box-sizing:border-box;
+    filter: blur(0.4px);
+    opacity:1;
+
+    /* animated corner highlight */
+    background:
+      linear-gradient(135deg,
+        rgba(255,255,255,0.0) 40%,
+        rgba(255,255,255,var(--shimmerStrength)) 50%,
+        rgba(255,255,255,0.0) 60%
+      );
+
+    /* Only show the gradient on the border stroke */
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    padding: var(--strokeWidth);
+
+    background-size: 200% 200%;
+    animation: borderRun var(--shimmerSpeed) linear infinite;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes borderRun{
     0%   { background-position:   0%   0%; }
     100% { background-position: 100% 100%; }
   }
 
-  /* Calm centered footer */
+  /* ===== Footer ===== */
   footer{
     position:fixed;
     left:0;
@@ -128,19 +141,19 @@
     pointer-events:none;
   }
 
-  /* Mobile balance */
+  /* Mobile */
   @media (max-width:520px){
     :root{
-      --logoSize: 120px;
-      --headerTop: 37%;
+      --logoSize:120px;
+      --headerTop:37%;
     }
     h1{ font-size:24px; letter-spacing:0.34em; }
     .tagline{ font-size:10px; letter-spacing:0.18em; padding:0 14px; }
   }
 
-  /* Accessibility: respect reduced motion */
+  /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
-    .shimmer{ animation:none; opacity:0.35; }
+    .shimmer::before{ animation:none; opacity:0.35; }
   }
 </style>
 </head>
@@ -152,8 +165,8 @@
   </div>
 
   <div class="logo-wrap" aria-label="Postworkflow.ai logo">
-    <span class="shimmer" aria-hidden="true"></span>
-    <img src="logo.png" alt="Postworkflow.ai logo" />
+    <div class="shimmer" aria-hidden="true"></div>
+    <img src="logo.png" alt="Postworkflow.ai logo">
   </div>
 
   <footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
