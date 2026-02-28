@@ -74,7 +74,7 @@
       Bottom-right shimmer/glow:
       - Small
       - Fairly quick
-      - Subtle
+      - Obvious
       - Lives behind the logo (z-index 1)
     */
     .logo-wrap::after {
@@ -92,7 +92,7 @@
 
       /* glow look */
       background: radial-gradient(
-        circle at 30% 30%,
+        circle at 60% 60%,
         rgba(255,255,255,0.55) 0%,
         rgba(255,255,255,0.18) 28%,
         rgba(255,255,255,0.08) 45%,
@@ -104,7 +104,7 @@
       transform: translate(0, 0) scale(0.92);
 
       /* fairly quick, subtle movement */
-      animation: shimmerGlow 1.15s ease-in-out infinite;
+      animation: shimmerGlow 3.15s ease-in-out infinite;
       mix-blend-mode: screen;
       pointer-events: none;
     }
@@ -112,15 +112,15 @@
     @keyframes shimmerGlow {
       0% {
         opacity: 0.00;
-        transform: translate(2px, 2px) scale(0.90);
+        transform: translate(2px, 2px) scale(1.00);
       }
       35%  { 
-      opacity: 0.75;    
-      transform: translate(-2px, -2px) scale(1.00);
+      opacity: 1.00;    
+      transform: translate(-2px, -2px) scale(3.00);
       }
       55% {
-        opacity: 0.25;
-        transform: translate(-1px, -3px) scale(0.98);
+        opacity: 0.50;
+        transform: translate(-1px, -3px) scale(1.00);
       }
       100% {
         opacity: 0.00;
