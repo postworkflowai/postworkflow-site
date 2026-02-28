@@ -1,106 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Postworkflow.ai</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Postworkflow.ai</title>
 
-  <style>
-    :root{
-      --bg: #000;     /* PURE BLACK */
-      --white: #fff;
-      --footerText: #777;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: var(--bg);
-      color: var(--white);
-      font-family: "Avenir Next Condensed", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    }
+/* Text block positioned slightly above centre */
+.header {
+  position: absolute;
+  top: 34%; /* adjust slightly if needed */
+  width: 100%;
+  text-align: center;
+}
 
-    /* Overall stage */
-    .stage {
-      height: 100%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-    }
+h1 {
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.42em;
+}
 
-    /* Title + tagline in upper third (like your PDF) */
-    .header {
-      margin-top: 20vh;     /* controls how high the header sits */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;            /* title-to-tagline spacing */
-    }
+.tagline {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
 
-    h1 {
-      margin: 0;
-      text-transform: uppercase;
-      font-weight: 500;
-      font-size: 30px;
-      letter-spacing: 0.42em;
-      line-height: 1;
-    }
+/* Logo centered + subtle breathing animation */
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 132px; /* ~20% larger */
+  animation: breathe 6s ease-in-out infinite;
+}
 
-    /* Tagline: NO background, just text */
-    .tagline {
-      margin: 0;
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      line-height: 1.2;
-      white-space: nowrap; /* keeps one line like your mock */
-    }
+@keyframes breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.025);
+  }
+}
 
-    /* Logo sits below the tagline */
-    .logo {
-      margin-top: 44px; /* space between tagline and logo */
-      width: 110px;
-      height: auto;
-      display: block;
-    }
-
-    /* Footer: centered, calm, NO background */
-    footer {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      letter-spacing: 0.10em;
-      color: var(--footerText);
-      white-space: nowrap;
-      text-align: center;
-    }
-
-    @media (max-width: 520px) {
-      h1 { font-size: 24px; letter-spacing: 0.34em; }
-      .tagline { font-size: 10px; letter-spacing: 0.18em; white-space: normal; max-width: 90vw; }
-      .logo { width: 96px; }
-      footer { font-size: 9px; white-space: normal; max-width: 90vw; }
-      .header { margin-top: 18vh; }
-    }
-  </style>
+/* Calm footer */
+footer {
+  position: fixed;
+  bottom: 35px;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  color: #777;
+}
+</style>
 </head>
 
 <body>
-  <main class="stage">
-    <section class="header">
-      <h1>POSTWORKFLOW.AI</h1>
-      <div class="tagline">DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST</div>
-    </section>
 
-    <img class="logo" src="logo.png" alt="Postworkflow.ai logo" />
+<div class="header">
+  <h1>POSTWORKFLOW.AI</h1>
+  <div class="tagline">
+    DETERMINISTIC INFRASTRUCTURE FOR REMOTE POST
+  </div>
+</div>
 
-    <footer>© 2026 Postworkflow.ai. All rights reserved.</footer>
-  </main>
+<img src="logo.png" class="logo" alt="Logo" />
+
+<footer>
+  © 2026 Postworkflow.ai. All rights reserved.
+</footer>
+
 </body>
 </html>
